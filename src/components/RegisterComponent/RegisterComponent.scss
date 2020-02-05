@@ -1,0 +1,25 @@
+.signupMain_form_bottom {
+  position: relative;
+}
+
+.signup-inputBlocker {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background: transparent;
+  bottom: 5px;
+}
+
+.signup-inputBlockerNo {
+  display: none;
+}
+
+#signup {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
