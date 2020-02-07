@@ -12,16 +12,21 @@
     display: none;
     font-size: 18px;
     font-weight: 800;
-    border: 2px solid #000;
+    border: 2px solid #fff;
     border-radius: 30px;
     padding-bottom: 10px;
     padding-top: 10px;
     padding-left: 25px;
     padding-right: 25px;
+    color: #fff;
     & i {
       font-size: 22px;
       padding-right: 5px;
+      color: #fff;
     }
+  }
+  &-link {
+    color: #3098ED;
   }
   &-loginTextLogin {
     display: block;
