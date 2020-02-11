@@ -5,6 +5,7 @@ import LoginComponent from "./components/LoginComponent/LoginComponent";
 import RegisterComponent from "./components/RegisterComponent/RegisterComponent";
 import ChangePasswordComponent from "./components/ChangePasswordComponent/ChangePasswordComponent";
 import MessagesComponent from "./components/MessagesComponent/MessagesComponent";
+import ProjectsComponent from "./components/ProjectsComponent/ProjectsComponent";
 
 
 const App : React.FC = () => {
@@ -16,6 +17,7 @@ const App : React.FC = () => {
           <Route exact path='/register' component={RegisterComponent} />
           <Route exact path='/reset' component={ChangePasswordComponent} />
           <Route exact path='/messages' component={MessagesComponent} />
+          <Route exact path='/projects' component={ProjectsComponent} />
         </Switch>
       </Router>
     </div>

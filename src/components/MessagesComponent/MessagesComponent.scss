@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
 .messagesHeader {
   width: 100%;
   min-height: 96px;
@@ -28,6 +31,8 @@
       align-items: center;
       justify-content: center;
       color: #fff;
+      background: transparent;
+      cursor: pointer;
       border: 2px solid #2196f3;
       border-radius: 24px;
       letter-spacing: 0.24px;
@@ -161,6 +166,9 @@
       transition: .2s;
       margin-right: 20px;
       margin-left: 20px;
+      &Active {
+        color: #fff;
+      }
       &:hover {
         color: #fff;
       }
@@ -217,6 +225,8 @@
   align-items: center;
   background: #2b2d3c;
   &-btn {
+    border: none;
+    cursor: pointer;
     width: 80%;
     height: 51px;
     border-radius: 5px;
