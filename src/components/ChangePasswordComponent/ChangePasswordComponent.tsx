@@ -17,7 +17,38 @@ const ChangePasswordComponent : React.FC = () => {
   const testNumber : RegExp = /[0-9]/;
 
   const sendRequest = (url : string, body = null) => {
-    return fetch(url)
+    return fetch(url,{
+      method : 'GET',
+      headers: {
+        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU'
+      },
+    })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        return response.json().then(error => {
+          const err : any = new Error('Something went wrong');
+          err.data = error;
+          throw err;
+        })
+      });
+  }
+
+  const sendRequestPost = (url : string, myPass : string, myConfirmPass : string, myEmail : string) => {
+    return fetch(url, {
+      method : 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU'
+      },
+      body : JSON.stringify({
+        password: myPass,
+        confirmationPassword: myConfirmPass,
+        email: myEmail,
+        // id: myId
+      }),
+    })
       .then(response => {
         if(response.ok) {
           return response.json();
@@ -78,11 +109,11 @@ const ChangePasswordComponent : React.FC = () => {
   const handleReset1Btn = (e : any) => {
     e.preventDefault();
 
-    sendRequest( 'http://localhost:3000/users')
+    sendRequest( 'https://geekhub-frontend-js-9.herokuapp.com/api/users/all')
       .then(data => {
         let resetNumber : number = 0;
         let resetEmailId : number = 0;
-        const dbEmails = data;
+        let dbEmails = data;
         for(let i = 0; i < dbEmails.length; i++) {
           if(resetEmail === dbEmails[i].email) {
             resetNumber = 1;
@@ -125,15 +156,7 @@ const ChangePasswordComponent : React.FC = () => {
   useEffect(() => {
     sendRequest( 'http://localhost:3000/users')
       .then(data => {
-        const dbEmails = data;
-        let resetEmailId : any;
-        for(let i = 0; i < dbEmails.length; i++) {
-          if(resetEmail === dbEmails[i].email) {
-            resetEmailId = i;
-            i = dbEmails.length - 1;
-          }
-        }
-        if(reset2Password === dbEmails[resetEmailId].password || reset2ConfirmPassword !== reset2Password || (reset2Password.length < 4 || !testLetters.test(reset2Password) || !testNumber.test(reset2Password) || reset2Password.length > 16)) {
+        if(reset2ConfirmPassword !== reset2Password || (reset2Password.length < 4 || !testLetters.test(reset2Password) || !testNumber.test(reset2Password) || reset2Password.length > 16)) {
           setReset2InputBlocker('reset2-inputBlocker');
           setReset2Error('Password is incorrect!');
         } else {
@@ -154,34 +177,46 @@ const ChangePasswordComponent : React.FC = () => {
   const handleReset2Btn = (e : any) => {
     e.preventDefault();
 
-    sendRequest( 'http://localhost:3000/users')
+    sendRequestPost('https://geekhub-frontend-js-9.herokuapp.com/api/users/reset_password', reset2Password, reset2ConfirmPassword, resetEmail)
       .then(data => {
-        let emailId : number = -1,
-          userNum : number = 0;
-        const dbEmails = data;
-        let decryptedPass : string = '';
-        for(let i = 0; i < dbEmails.length; i++) {
-          if(resetEmail === dbEmails[i].email) {
-            emailId = dbEmails[i].id;
-            userNum = i;
-            i = dbEmails.length - 1;
-          }
-        }
-        if(emailId !== -1) {
-          console.log(emailId);
-          for(let i = 0; i < dbEmails[userNum].password.length; i++) {
-            decryptedPass += dbEmails[userNum].password[i];
-            i += 7;
-          }
-          alert('Password was changed!(It doesn\'t work! I am sorry but I dont know how to do this((( )');
-          alert(`Your password: ${decryptedPass}`);
-          document.location.reload();
-        } else {
-          alert('Account was not found');
-          document.location.reload();
-        }
+        console.log(data)
+        alert('Password was changed!');
+        document.location.reload();
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        alert('Account was not found');
+        document.location.reload();
+      })
+
+    // sendRequest( 'http://localhost:3000/users')
+    //   .then(data => {
+    //     let emailId : number = -1,
+    //       userNum : number = 0;
+    //     const dbEmails = data;
+    //     let decryptedPass : string = '';
+    //     for(let i = 0; i < dbEmails.length; i++) {
+    //       if(resetEmail === dbEmails[i].email) {
+    //         emailId = dbEmails[i].id;
+    //         userNum = i;
+    //         i = dbEmails.length - 1;
+    //       }
+    //     }
+    //     if(emailId !== -1) {
+    //       console.log(emailId);
+    //       for(let i = 0; i < dbEmails[userNum].password.length; i++) {
+    //         decryptedPass += dbEmails[userNum].password[i];
+    //         i += 7;
+    //       }
+    //       alert('Password was changed!(It doesn\'t work! I am sorry but I dont know how to do this((( )');
+    //       alert(`Your password: ${decryptedPass}`);
+    //       document.location.reload();
+    //     } else {
+    //       alert('Account was not found');
+    //       document.location.reload();
+    //     }
+    //   })
+    //   .catch(error => console.log(error))
   }
 
   return (

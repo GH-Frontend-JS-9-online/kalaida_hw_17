@@ -10,12 +10,19 @@ const MessagesComponent : React.FC = () => {
   // const [ asidePhone, setAsidePhone ] =  useState('');
   // const [ asideAddress, setAsideAddress ] =  useState('');
   // const [ asideOrganization, setAsideOrganization ] =  useState('');
-  const [ showNumber, setShowNumber ] = useState(0);
+  const [ showNumber, setShowNumber ] : React.ComponentState = useState(2);
   // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   // const idSymbols = 'abcdefghijklmnopqrstuvwxyz1234567890';
   // const wordsTemplates = ['Hello! How r u doing?', 'Hi! How was your day?', 'What\'s up bro!', 'Yo man!!'];
+  let loginUserId : any = sessionStorage.getItem('login_user_id');
 
-
+  useEffect(() => {
+    if(loginUserId.length < 1) {
+      setShowNumber(1)
+    } else {
+      setShowNumber(0)
+    }
+  }, [showNumber, loginUserId])
 
 
   const showMainMessages = () => {

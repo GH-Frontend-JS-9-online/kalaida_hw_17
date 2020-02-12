@@ -6,7 +6,12 @@ const ProjectsComponent : React.FC = () => {
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(0);
 
   const sendRequest = (url : string, body = null) => {
-    return fetch(url)
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU'
+      }
+    })
       .then(response => {
         if(response.ok) {
           return response.json();
@@ -18,6 +23,30 @@ const ProjectsComponent : React.FC = () => {
             throw err;
           })
       })
+  }
+
+  const sendRequestPost = (url : string) => {
+    return fetch(url, {
+      method : 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body : JSON.stringify({
+        email: "john.marston@email.com",
+        password: "11111111",
+        name: "John Marston"
+      }),
+    })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        return response.json().then(error => {
+          const err : any = new Error('Something went wrong');
+          err.data = error;
+          throw err;
+        })
+      });
   }
 
   useEffect(() => {
@@ -57,8 +86,16 @@ const ProjectsComponent : React.FC = () => {
               <img src="https://image.prntscr.com/image/qKdNjt1VQcaxYyMVA3vEmg.png" alt="Logo" />
             </div>
             <div className="messagesHeader_right">
-              <button className="messagesHeader_right-btn">Add <span> +</span></button>
-              <Link to={'#'} className="messagesHeader_right-search"><i className="fa fa-search" aria-hidden="true"></i></Link>
+              <button className="messagesHeader_right-btn" onClick={() => {
+                sendRequest('https://geekhub-frontend-js-9.herokuapp.com/api/users/all')
+                  .then(data => {
+                    console.log(data)
+                  })
+                  .catch(error => console.log(error))
+              }}>Add <span> +</span></button>
+              <Link to={'#'} className="messagesHeader_right-search" onClick={() => {
+                sendRequestPost('https://geekhub-frontend-js-9.herokuapp.com/api/users/')
+              }}><i className="fa fa-search" aria-hidden="true"></i></Link>
               <Link to={'#'} className="messagesHeader_right-notifications"><i className="fa fa-bell-o" aria-hidden="true"></i></Link>
               <Link to={'#'} className="messagesHeader_right-profile">
                 <div className="messagesHeader_right-profile-avatar"></div>
