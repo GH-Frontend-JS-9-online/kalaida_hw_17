@@ -63,7 +63,7 @@ const RegisterComponent : React.FC = () => {
   }
 
   useEffect(() => {
-    if(!testName.test(nameRegister) || nameRegister.length < 4 || nameRegister.length > 36 || !validator.isEmail(emailRegister) || passwordRegister.length < 4 || !testLetters.test(passwordRegister) || !testNumber.test(passwordRegister) || passwordRegister.length > 24) {
+    if(!testName.test(nameRegister) || nameRegister.length < 4 || nameRegister.length > 36 || !validator.isEmail(emailRegister) || passwordRegister.length < 8 || !testLetters.test(passwordRegister) || !testNumber.test(passwordRegister) || passwordRegister.length > 24) {
       setRegisterBlocker('signup-inputBlocker');
       setRegisterError('Oops, looks like name, email or password is incorrect. Please try again.');
     } else {
@@ -118,7 +118,7 @@ const RegisterComponent : React.FC = () => {
       .then((data) => {
         alert('You\'ve successfully registered!');
         console.log(data)
-        // document.location.reload();
+        document.location.reload();
       })
       .catch(error => {
         console.log(error)

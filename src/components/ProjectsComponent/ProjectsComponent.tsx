@@ -25,29 +25,7 @@ const ProjectsComponent : React.FC = () => {
       })
   }
 
-  const sendRequestPost = (url : string) => {
-    return fetch(url, {
-      method : 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body : JSON.stringify({
-        email: "john.marston@email.com",
-        password: "11111111",
-        name: "John Marston"
-      }),
-    })
-      .then(response => {
-        if(response.ok) {
-          return response.json();
-        }
-        return response.json().then(error => {
-          const err : any = new Error('Something went wrong');
-          err.data = error;
-          throw err;
-        })
-      });
-  }
+
 
   useEffect(() => {
     sendRequest('https://geekhub-frontend-js-9.herokuapp.com/api/projects')
@@ -93,9 +71,7 @@ const ProjectsComponent : React.FC = () => {
                   })
                   .catch(error => console.log(error))
               }}>Add <span> +</span></button>
-              <Link to={'#'} className="messagesHeader_right-search" onClick={() => {
-                sendRequestPost('https://geekhub-frontend-js-9.herokuapp.com/api/users/')
-              }}><i className="fa fa-search" aria-hidden="true"></i></Link>
+              <Link to={'#'} className="messagesHeader_right-search"><i className="fa fa-search" aria-hidden="true"></i></Link>
               <Link to={'#'} className="messagesHeader_right-notifications"><i className="fa fa-bell-o" aria-hidden="true"></i></Link>
               <Link to={'#'} className="messagesHeader_right-profile">
                 <div className="messagesHeader_right-profile-avatar"></div>
@@ -133,7 +109,9 @@ const ProjectsComponent : React.FC = () => {
               </div>
             </div>
             <div className="mainProjects_bottom">
+              <div className="mainProjects_bottom_posts">
 
+              </div>
             </div>
           </div>
         </main>

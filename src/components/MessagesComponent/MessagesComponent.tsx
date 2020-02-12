@@ -3,13 +3,14 @@ import './MessagesComponent.scss'
 import { Link } from "react-router-dom";
 
 const MessagesComponent : React.FC = () => {
-  // const [ asideName, setAsideName ] =  useState('');
-  // const [ asidePosition, setAsidePosition ] =  useState('');
-  // const [ asideDescription, setAsideDescription ] =  useState('');
-  // const [ asideEmail, setAsideEmail ] =  useState('');
-  // const [ asidePhone, setAsidePhone ] =  useState('');
-  // const [ asideAddress, setAsideAddress ] =  useState('');
-  // const [ asideOrganization, setAsideOrganization ] =  useState('');
+  const [ asideName, setAsideName ] =  useState('');
+  const [ asidePosition, setAsidePosition ] =  useState('');
+  const [ asideDescription, setAsideDescription ] =  useState('');
+  const [ asideEmail, setAsideEmail ] =  useState('');
+  const [ asidePhone, setAsidePhone ] =  useState('');
+  const [ asideAddress, setAsideAddress ] =  useState('');
+  const [ asideOrganization, setAsideOrganization ] =  useState('');
+  const [ showFriendInformationNumber, setShowFriendInformationNumber ] : React.ComponentState = useState(0)
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(2);
   // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   // const idSymbols = 'abcdefghijklmnopqrstuvwxyz1234567890';
@@ -24,6 +25,84 @@ const MessagesComponent : React.FC = () => {
     }
   }, [showNumber, loginUserId])
 
+  const sendRequestGet = (url : string, body = null) => {
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU'
+      }
+    })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        return response.json()
+          .then(error => {
+            const err : any = new Error('Something went wrong');
+            err.data = error;
+            throw err;
+          })
+      })
+  }
+
+  const newConversation = () => {
+    sendRequestGet('https://geekhub-frontend-js-9.herokuapp.com/api/users/all')
+      .then(data => {
+        let dbUsers : Array<any> = data,
+          friendIndex = Math.floor(Math.random() * dbUsers.length);
+
+        if(dbUsers[friendIndex]._id !== sessionStorage.getItem('login_user_id')) {
+          sessionStorage.setItem('friend_id', dbUsers[friendIndex]._id);
+        } else {
+          friendIndex = Math.floor(Math.random() * dbUsers.length);
+          sessionStorage.setItem('friend_id', dbUsers[friendIndex]._id);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+
+    let unparsedDBUsers : any = localStorage.getItem('users'),
+      dbUsers : Array<any> = JSON.parse(unparsedDBUsers),
+      friendId : any = sessionStorage.getItem('friend_id'),
+      friendIndex : number = -1;
+
+    for(let i : number = 0; i < dbUsers.length; i++) {
+      if(dbUsers[i]._id === friendId) {
+        friendIndex = i;
+        i = dbUsers.length - 1;
+      }
+    }
+
+    setAsideName(dbUsers[friendIndex].name);
+    setAsidePosition(dbUsers[friendIndex].position);
+    setAsideDescription(dbUsers[friendIndex].description);
+    setAsidePhone(dbUsers[friendIndex].phone);
+    setAsideAddress(dbUsers[friendIndex].address);
+    setAsideOrganization(dbUsers[friendIndex].organization);
+    setAsideEmail(dbUsers[friendIndex].email);
+
+    setShowFriendInformationNumber(1);
+  }
+
+  const showFriendInformationBlock = () => {
+    return (
+      <>
+        <div id={'asideUserAvatar'}></div>
+        <p id={'asideUserName'}>{asideName}</p>
+        <p id={'asideUserPost'}>{asidePosition}</p>
+        <p id={'asideUserDescription'}>{asideDescription}</p>
+        <p className={'aside-userList'}>Email</p>
+        <p id="asideUserEmail">{asideEmail}</p>
+        <p className="aside-userList">Phone</p>
+        <p id="asideUserPhone">{asidePhone}</p>
+        <p className="aside-userList">Address</p>
+        <p id="asideUserAddress">{asideAddress}</p>
+        <p className="aside-userList">Organization</p>
+        <p id="asideUserOrganization">{asideOrganization}</p>
+      </>
+    )
+  }
 
   const showMainMessages = () => {
     return (
@@ -75,7 +154,7 @@ const MessagesComponent : React.FC = () => {
             </div>
             <div className="mainMessages_bottom">
               <div className="conversations">
-                <button className="conversations-btn" id="newConversationBtn"><span>+</span> New Conversation</button>
+                <button className="conversations-btn" id="newConversationBtn" onClick={newConversation}><span>+</span> New Conversation</button>
               </div>
               <div className="messaging">
                 <form id="messagingForm">
@@ -105,8 +184,7 @@ const MessagesComponent : React.FC = () => {
                 </div>
               </div>
               <div className="aside">
-
-
+                { showFriendInformationNumber === 1 ? showFriendInformationBlock() : null }
               </div>
             </div>
           </div>

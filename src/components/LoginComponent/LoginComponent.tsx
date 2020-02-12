@@ -142,6 +142,8 @@ const LoginComponent : React.FC = () => {
         let dbUsers : Array<any> = data,
           checkEmailNumber : number = 0;
 
+        localStorage.setItem('users', JSON.stringify(dbUsers))
+
         for(let i = 0; i < dbUsers.length; i++) {
           if (emailLogin === dbUsers[i].email) {
             checkEmailNumber = i;
