@@ -18,6 +18,7 @@ const MessagesComponent : React.FC = () => {
   let loginUserId : any = sessionStorage.getItem('login_user_id');
 
   useEffect(() => {
+
     if(loginUserId.length < 1) {
       setShowNumber(1)
     } else {
@@ -104,6 +105,15 @@ const MessagesComponent : React.FC = () => {
     )
   }
 
+  const loadProjects = () => {
+    sendRequestGet('https://geekhub-frontend-js-9.herokuapp.com/api/projects')
+      .then(data => {
+        localStorage.setItem('projects_array', JSON.stringify(data));
+        return data;
+      })
+      .catch(error => console.log(error))
+  }
+
   const showMainMessages = () => {
     return (
       <>
@@ -128,7 +138,7 @@ const MessagesComponent : React.FC = () => {
           <div className="mainMessages_sidebar">
             <div className="mainMessages_sidebar_links">
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
-              <Link to={'/projects'} className="mainMessages_sidebar-link"><i className="fa fa-bars" aria-hidden="true"></i></Link>
+              <Link to={'/projects'} onClick={loadProjects} className="mainMessages_sidebar-link"><i className="fa fa-bars" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-line-chart" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-linkActive"><i className="fa fa-envelope" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-users" aria-hidden="true"></i></Link>

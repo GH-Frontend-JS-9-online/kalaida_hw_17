@@ -154,18 +154,14 @@ const ChangePasswordComponent : React.FC = () => {
   }
 
   useEffect(() => {
-    sendRequest( 'http://localhost:3000/users')
-      .then(data => {
-        if(reset2ConfirmPassword !== reset2Password || (reset2Password.length < 4 || !testLetters.test(reset2Password) || !testNumber.test(reset2Password) || reset2Password.length > 16)) {
-          setReset2InputBlocker('reset2-inputBlocker');
-          setReset2Error('Password is incorrect!');
-        } else {
-          setReset2InputBlocker('reset2-inputBlocker reset2-inputBlockerNo');
-          setReset2Error('');
-        }
-      })
-      .catch(error => console.log(error))
-  })
+      if(reset2ConfirmPassword !== reset2Password || (reset2Password.length < 4 || !testLetters.test(reset2Password) || !testNumber.test(reset2Password) || reset2Password.length > 16)) {
+        setReset2InputBlocker('reset2-inputBlocker');
+        setReset2Error('Password is incorrect!');
+      } else {
+        setReset2InputBlocker('reset2-inputBlocker reset2-inputBlockerNo');
+        setReset2Error('');
+      }
+  }, [reset2Password, reset2ConfirmPassword, testLetters, testNumber])
   
 
 

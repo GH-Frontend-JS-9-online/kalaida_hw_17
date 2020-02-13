@@ -4,6 +4,8 @@
 .messagesHeader {
   width: 100%;
   min-height: 96px;
+  position: fixed;
+  z-index: 99999999;
   background: #2f3242;
   box-shadow: 0 3px 80px rgba(23, 24, 32, 0.2);
   &_container {
@@ -103,6 +105,7 @@
   min-height: calc(100% - 93px);
   display: flex;
   box-shadow: 0 3px 80px rgba(23, 24, 32, 0.3);
+  margin-top: 95px;
   &_sidebar {
     width: 5%;
     min-height: 850px;
@@ -110,6 +113,8 @@
     box-shadow: 0 3px 80px rgba(23, 24, 32, 0.2);
     display: flex;
     flex-direction: column;
+    position: fixed;
+    z-index: 999999999;
     &_links {
       display: flex;
       flex-direction: column;
@@ -139,6 +144,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: 5%;
   }
   &_bar {
     width: 100%;
@@ -561,6 +567,10 @@
     }
     &_content {
       width: 100%;
+      margin-left: 0;
+    }
+    &_bar {
+      margin-top: 120px;
     }
   }
 }
@@ -660,6 +670,9 @@
       min-height: 78px;
       justify-content: center;
     }
+  }
+  .mainMessages {
+    margin-top: 155px;
   }
 }
 

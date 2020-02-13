@@ -4,6 +4,25 @@ import { Link } from "react-router-dom";
 
 const ProjectsComponent : React.FC = () => {
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(0);
+  const [ projects, setProjects ] : React.ComponentState = useState(localStorage.getItem('sorted_projects_array'));
+  let parsedProjects : any = JSON.parse(projects);
+  let loginUserId : any = sessionStorage.getItem('login_user_id');
+
+  useEffect(() => {
+
+    if(loginUserId.length < 1) {
+      setShowNumber(1)
+    } else {
+      setShowNumber(0)
+    }
+  }, [showNumber, loginUserId])
+
+  const formatDate = (customDate : string) : string => {
+    const months : Array<string> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const date : Date = new Date(customDate);
+    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+  }
+
 
   const sendRequest = (url : string, body = null) => {
     return fetch(url, {
@@ -34,10 +53,11 @@ const ProjectsComponent : React.FC = () => {
         return data;
       })
       .catch(error => console.log(error))
-    let projectsArray : any = [];
+
+  let projectsArray : any = [];
 
     let localStorageProjects : any = localStorage.getItem('projects_array')
-    let parsedLocalStorageProjects : Array<any> = JSON.parse(localStorageProjects);
+    let parsedLocalStorageProjects : any = JSON.parse(localStorageProjects);
 
     for(let i : number = 0; i < parsedLocalStorageProjects.length; i++) {
       if(parsedLocalStorageProjects[i].assigned !== null) {
@@ -108,8 +128,37 @@ const ProjectsComponent : React.FC = () => {
                 </form>
               </div>
             </div>
-            <div className="mainProjects_bottom">
+            <div className="mainProjects_bottom" onClick={() => console.log(parsedProjects)}>
+
               <div className="mainProjects_bottom_posts">
+                { parsedProjects.map( (project : any, index : number) => <div className={`mainProjects_bottom_project 
+                ${project.progress > 0 ? 'mainProjects_bottom_projectBlueBorder' : 'mainProjects_bottom_projectWhiteBorder'}
+                 ${project.progress === 100 ? 'mainProjects_bottom_projectGreenBorder' : null}`} key={index}>
+
+                  <div className="mainProjects_bottom_project_container">
+                    <p className={'project-paragraph project-title'}>
+                      { project.title }
+                      <span>{ project.company }</span>
+                    </p>
+                    <p className={'project-paragraph project-cost'}>{project.cost}</p>
+                    <p className={'project-paragraph project-deadline'}>{formatDate(project.deadline)}</p>
+                    <p className={'project-paragraph project-spentTime'}>{project.timeSpent} hours</p>
+                    <div className={'project-paragraph2 project-progress'}><span>{project.progress}%</span>
+                      <div className={'project-progress-bar'}>
+                        <div className={`project-progress-bar_container ${project.progress === 100 ? 'project-progress-bar_containerGreen' : null}`} style={{width: `${project.progress}%`}}></div>
+                      </div>
+                    </div>
+                    <p className={'project-paragraph project-status'}>{project.status}</p>
+                    <div className={'project-user'}>
+                      <div className="project-user-avatar" style={project.assigned._id === localStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
+                      <div className={'project-user_information'}>
+                        <p className={'project-user-name'}>{project.assigned.name}</p>
+                        <p className={'project-user-position'}>{project.assigned._id === localStorage.getItem('login_user_id') ? 'Account' : project.assigned.position}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div> ) }
 
               </div>
             </div>

@@ -134,7 +134,7 @@ const LoginComponent : React.FC = () => {
       .catch(err => {
         console.log(err)
         sessionStorage.setItem('logedIN', '0');
-        alert('Account was not found');
+        alert('Account was not found or password is incorrect!');
         document.location.reload();
       })
     sendRequestGet('https://geekhub-frontend-js-9.herokuapp.com/api/users/all')
