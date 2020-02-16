@@ -162,34 +162,338 @@
   }
 }
 
-@media (min-width: 320px) and (max-width: 1149px) {
+@media (min-width: 940px) and (max-width: 1149px) {
   .project {
     &-paragraph {
-      font-size: 12px;
+      font-size: 15px;
+      width: 25%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-paragraph2 {
+      font-size: 15px;
+      width: 25%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     &-user-name {
-      font-size: 12px;
+      font-size: 15px;
     }
     &-user-position {
-      font-size: 10px;
+      font-size: 12px;
     }
     &-title {
-      & span {
-        font-size: 10px;
-      }
-    }
-    &-progress {
+      width: 25%;
+      height: 100px;
+      justify-content: center;
+      align-items: center;
       & span {
         font-size: 12px;
       }
     }
+    &-deadline {
+      width: 25%;
+      height: 100px;
+      justify-content: center;
+      align-items: center;
+    }
+    &-spentTime {
+      width: 15%;
+      height: 100px;
+      justify-content: center;
+      align-items: center;
+    }
+    &-progress {
+      width: 30%;
+      height: 100px;
+      justify-content: center;
+      align-items: center;
+      & span {
+        font-size: 15px;
+      }
+    }
+    &-status {
+      width: 25%;
+      height: 100px;
+      justify-content: center;
+      align-items: center;
+    }
     &-cost {
-      width: calc((100% / 8) / 2);
+      width: 25%;
+      height: 100px;
       margin-right: 10px;
       margin-left: 5px;
+      justify-content: center;
+      align-items: center;
     }
     &-user {
-      width: calc((100% / 8) * 2);
+      width: 25%;
+      height: 100px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .mainProjects {
+    &_bottom {
+      &_project {
+        &_container {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 640px) and (max-width: 939px) {
+  .project {
+    &-paragraph {
+      font-size: 15px;
+      width: 33.33%;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-paragraph2 {
+      font-size: 15px;
+      width: 33.33%;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-user-name {
+      font-size: 15px;
+    }
+    &-user-position {
+      font-size: 12px;
+    }
+    &-title {
+      justify-content: center;
+      align-items: center;
+      & span {
+        font-size: 12px;
+      }
+    }
+    &-deadline {
+      justify-content: center;
+      align-items: center;
+    }
+    &-spentTime {
+      justify-content: center;
+      align-items: center;
+    }
+    &-progress {
+      min-height: 70px;
+      width: 38%;
+      justify-content: center;
+      align-items: center;
+      & span {
+        font-size: 15px;
+        margin-right: 10px;
+      }
+    }
+    &-status {
+      justify-content: center;
+      align-items: center;
+    }
+    &-cost {
+      width: 25%;
+      margin-right: 10px;
+      margin-left: 5px;
+      justify-content: center;
+      align-items: center;
+    }
+    &-user {
+      min-height: 70px;
+      width: 33.33%;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .mainProjects {
+    &_bottom {
+      &_project {
+        &_container {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 440px) and (max-width: 639px) {
+  .project {
+    &-paragraph {
+      font-size: 15px;
+      width: 50%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+    &-paragraph2 {
+      font-size: 15px;
+      width: 50%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+    &-user-name {
+      font-size: 15px;
+      text-align: center;
+    }
+    &-user-position {
+      font-size: 12px;
+      text-align: center;
+    }
+    &-title {
+      justify-content: center;
+      align-items: center;
+      & span {
+        font-size: 12px;
+      }
+    }
+    &-deadline {
+      justify-content: center;
+      align-items: center;
+    }
+    &-spentTime {
+      justify-content: center;
+      align-items: center;
+    }
+    &-progress {
+      min-height: 50px;
+      width: 50%;
+      justify-content: center;
+      align-items: center;
+      & span {
+        font-size: 15px;
+        margin-right: 10px;
+      }
+    }
+    &-status {
+      justify-content: center;
+      align-items: center;
+    }
+    &-cost {
+      width: 50%;
+      margin-right: 10px;
+      margin-left: 5px;
+      justify-content: center;
+      align-items: center;
+    }
+    &-user {
+      min-height: 50px;
+      width: 50%;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+
+  .mainProjects {
+    &_bottom {
+      &_project {
+        &_container {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 439px) {
+  .project {
+    &-paragraph {
+      font-size: 15px;
+      width: 100%;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+    &-paragraph2 {
+      font-size: 15px;
+      width: 100%;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+    &-user-name {
+      font-size: 15px;
+      text-align: center;
+    }
+    &-user-position {
+      font-size: 12px;
+      text-align: center;
+    }
+    &-title {
+      justify-content: center;
+      align-items: center;
+      & span {
+        font-size: 12px;
+      }
+    }
+    &-deadline {
+      justify-content: center;
+      align-items: center;
+    }
+    &-spentTime {
+      justify-content: center;
+      align-items: center;
+    }
+    &-progress {
+      min-height: 40px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      & span {
+        font-size: 15px;
+        margin-right: 10px;
+      }
+    }
+    &-status {
+      justify-content: center;
+      align-items: center;
+    }
+    &-cost {
+      width: 100%;
+      margin-right: 10px;
+      margin-left: 5px;
+      justify-content: center;
+      align-items: center;
+    }
+    &-user {
+      min-height: 40px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+
+  .mainProjects {
+    &_bottom {
+      &_project {
+        &_container {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
     }
   }
 }
