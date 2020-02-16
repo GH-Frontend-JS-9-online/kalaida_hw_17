@@ -123,7 +123,7 @@ const MessagesComponent : React.FC = () => {
               <img src="https://image.prntscr.com/image/qKdNjt1VQcaxYyMVA3vEmg.png" alt="Logo" />
             </div>
             <div className="messagesHeader_right">
-              <button className="messagesHeader_right-btn">Add <span> +</span></button>
+              <Link to={'/add_project'} className="messagesHeader_right-btn" onClick={loadProjects}>Add <span> +</span></Link>
               <Link to={'#'} className="messagesHeader_right-search"><i className="fa fa-search" aria-hidden="true"></i></Link>
               <Link to={'#'} className="messagesHeader_right-notifications"><i className="fa fa-bell-o" aria-hidden="true"></i></Link>
               <Link to={'#'} className="messagesHeader_right-profile">

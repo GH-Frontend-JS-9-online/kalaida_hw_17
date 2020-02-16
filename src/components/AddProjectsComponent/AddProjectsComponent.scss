@@ -1,0 +1,16 @@
+.addProject {
+  width: 100%;
+  height: 100%;
+  &_form {
+    width: 500px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    &-title {
+      color: #fff;
+    }
+  }
+}
