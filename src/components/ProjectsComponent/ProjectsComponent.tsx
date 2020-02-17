@@ -144,10 +144,10 @@ const ProjectsComponent : React.FC = () => {
                     </div>
                     <p className={'project-paragraph project-status'}>{project.status}</p>
                     <div className={'project-user'}>
-                      <div className="project-user-avatar" style={project.assigned._id === localStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
+                      <div className="project-user-avatar" style={project.assigned._id === sessionStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
                       <div className={'project-user_information'}>
                         <p className={'project-user-name'}>{project.assigned.name}</p>
-                        <p className={'project-user-position'}>{project.assigned._id === localStorage.getItem('login_user_id') ? 'Account' : project.assigned.position}</p>
+                        <p className={'project-user-position'}>{project.assigned._id === sessionStorage.getItem('login_user_id') ? 'Account' : project.assigned.position}</p>
                       </div>
                     </div>
                   </div>

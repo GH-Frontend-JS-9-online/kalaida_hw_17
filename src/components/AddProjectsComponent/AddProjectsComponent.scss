@@ -3,14 +3,80 @@
   height: 100%;
   &_form {
     width: 500px;
-    min-height: 600px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     margin: auto;
     margin-top: 10%;
     margin-bottom: 5%;
+    position: relative;
     &-title {
       color: #fff;
     }
+    &-input {
+      width: 80%;
+      height: 51px;
+      border-radius: 10px;
+      border: 1px solid rgba(156, 161, 178, 0.3);
+      background: #404359;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .32px;
+      padding-left: 15px;
+      margin-bottom: 15px;
+      outline: none;
+      &::placeholder {
+        font-weight: 800;
+      }
+    }
+    &-btn {
+      width: 80px;
+      height: 31px;
+      border-radius: 5px;
+      background: #2196f3;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .24px;
+      color: #fff;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: .2s;
+      &:hover {
+        background: #2DA2FF;
+      }
+      &:active {
+        background: #2196f3;
+      }
+    }
+    &-error {
+      width: 75%;
+      font-size: 14px;
+      color: #ff0000;
+      font-weight: 800;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  }
+  &-blocker {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    background: transparent;
+    bottom: 5px;
+  }
+
+  &-blockerNo {
+    display: none;
+  }
+  &-link {
+    color: #fff;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
   }
 }
