@@ -15,7 +15,7 @@ const MessagesComponent : React.FC = () => {
   // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   // const idSymbols = 'abcdefghijklmnopqrstuvwxyz1234567890';
   // const wordsTemplates = ['Hello! How r u doing?', 'Hi! How was your day?', 'What\'s up bro!', 'Yo man!!'];
-  let loginUserId : any = sessionStorage.getItem('login_user_id');
+  let loginUserId : any = localStorage.getItem('login_user_id');
 
   useEffect(() => {
 
@@ -52,11 +52,11 @@ const MessagesComponent : React.FC = () => {
         let dbUsers : Array<any> = data,
           friendIndex = Math.floor(Math.random() * dbUsers.length);
 
-        if(dbUsers[friendIndex]._id !== sessionStorage.getItem('login_user_id')) {
-          sessionStorage.setItem('friend_id', dbUsers[friendIndex]._id);
+        if(dbUsers[friendIndex]._id !== localStorage.getItem('login_user_id')) {
+          localStorage.setItem('friend_id', dbUsers[friendIndex]._id);
         } else {
           friendIndex = Math.floor(Math.random() * dbUsers.length);
-          sessionStorage.setItem('friend_id', dbUsers[friendIndex]._id);
+          localStorage.setItem('friend_id', dbUsers[friendIndex]._id);
         }
       })
       .catch(error => {
@@ -65,7 +65,7 @@ const MessagesComponent : React.FC = () => {
 
     let unparsedDBUsers : any = localStorage.getItem('users'),
       dbUsers : Array<any> = JSON.parse(unparsedDBUsers),
-      friendId : any = sessionStorage.getItem('friend_id'),
+      friendId : any = localStorage.getItem('friend_id'),
       friendIndex : number = -1;
 
     for(let i : number = 0; i < dbUsers.length; i++) {

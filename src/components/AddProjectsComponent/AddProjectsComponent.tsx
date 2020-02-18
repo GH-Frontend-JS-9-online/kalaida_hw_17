@@ -12,7 +12,7 @@ const AddProjectsComponent : React.FC = () => {
   const [ projectDeadline, setProjectDeadline ] : React.ComponentState = useState('');
   const [ loginError, setLoginError ] : React.ComponentState = useState('');
   const [ addProjectBlocker, setAddProjectBlocker ] : React.ComponentState = useState('addProject-blocker');
-  let loginUserId : any = sessionStorage.getItem('login_user_id');
+  let loginUserId : any = localStorage.getItem('login_user_id');
   let checkDate : RegExp = /^\d{4}\-\d{2}\-\d{2}$/;
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const AddProjectsComponent : React.FC = () => {
   };
 
   useEffect(() => {
-    if(!/^[A-Za-z\s][A-Za-z0-9\s]*$/.test(projectTitle) || projectTitle.search(/[A-Z]/) < 0 || projectTitle.length < 1 || projectTitle.length > 32 || !/^[A-Za-z\s][A-Za-z0-9\s]*$/.test(projectCompany) || projectCompany.search(/[A-Z]/) < 0 || projectCompany.length < 1 || projectCompany.length > 32 || projectCost.length < 1 || projectCost.length > 10 || !/^[0-9]*$/.test(projectCost) || !checkDate.test(projectDeadline)) {
+    if(!/^[A-Za-z\s][A-Za-z0-9/!_.\s-]*$/.test(projectTitle) || projectTitle.search(/[A-Z]/) < 0 || projectTitle.length < 1 || projectTitle.length > 32 || !/^[A-Za-z\s][A-Za-z0-9/!_.\s-]*$/.test(projectCompany) || projectCompany.search(/[A-Z]/) < 0 || projectCompany.length < 1 || projectCompany.length > 32 || projectCost.length < 1 || projectCost.length > 10 || !/^[0-9]*$/.test(projectCost) || !checkDate.test(projectDeadline)) {
       setAddProjectBlocker('addProject-blocker');
       setLoginError('Oops, looks like title, company, cost or deadline is incorrect. Please try again.');
     } else {
@@ -114,7 +114,7 @@ const AddProjectsComponent : React.FC = () => {
       myStatus = statusesArray[Math.floor(Math.random() * statusesArray.length)];
     }
 
-    sendRequestPost('https://geekhub-frontend-js-9.herokuapp.com/api/projects/', projectTitle, projectCompany, '$' + projectCost, projectDeadline, sessionStorage.getItem('login_user_id'))
+    sendRequestPost('https://geekhub-frontend-js-9.herokuapp.com/api/projects/', projectTitle, projectCompany, '$' + projectCost, projectDeadline, localStorage.getItem('login_user_id'))
       .then(data => {
         console.log(data)
       })
@@ -155,6 +155,10 @@ const AddProjectsComponent : React.FC = () => {
     localStorage.setItem('projects_count', projectsArrayLength);
   })
 
+  const gotoProjects = () => {
+    document.location.href = '/projects';
+  }
+
   const showMainContent = () => {
     return (
       <>
@@ -169,7 +173,7 @@ const AddProjectsComponent : React.FC = () => {
             <button id={'projectCreate'} className={'addProject_form-btn'} onClick={createProject}>Create</button>
             <div id="loginInputBlocker" className={addProjectBlocker}></div>
           </form>
-          { showLink === 1 ? <Link className={'addProject-link'} to={'/projects'}>Go to Projects</Link> : null}
+          { showLink === 1 ? <p className={'addProject-link'} onClick={gotoProjects}>Go to Projects</p> : null}
         </div>
       </>
     )

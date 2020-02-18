@@ -6,7 +6,7 @@ const ProjectsComponent : React.FC = () => {
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(0);
   const [ projects, setProjects ] : React.ComponentState = useState(localStorage.getItem('sorted_projects_array'));
   let parsedProjects : any = JSON.parse(projects);
-  let loginUserId : any = sessionStorage.getItem('login_user_id');
+  let loginUserId : any = localStorage.getItem('login_user_id');
 
   useEffect(() => {
 
@@ -44,19 +44,17 @@ const ProjectsComponent : React.FC = () => {
       })
   }
 
-
-
-  useEffect(() => {
+  setInterval(function () {
     sendRequest('https://geekhub-frontend-js-9.herokuapp.com/api/projects')
       .then(data => {
         localStorage.setItem('projects_array', JSON.stringify(data));
         return data;
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
 
-  let projectsArray : any = [];
+    let projectsArray : any = [];
 
-    let localStorageProjects : any = localStorage.getItem('projects_array')
+    let localStorageProjects : any = localStorage.getItem('projects_array');
     let parsedLocalStorageProjects : any = JSON.parse(localStorageProjects);
 
     for(let i : number = 0; i < parsedLocalStorageProjects.length; i++) {
@@ -65,13 +63,12 @@ const ProjectsComponent : React.FC = () => {
       }
     }
 
-    localStorage.setItem('sorted_projects_array', JSON.stringify(projectsArray))
+    localStorage.setItem('sorted_projects_array', JSON.stringify(projectsArray));
 
     let projectsArrayLength : any = projectsArray.length;
 
     localStorage.setItem('projects_count', projectsArrayLength)
-    console.log(projectsArray)
-  })
+  }, 1000)
 
 
   const showMainProjects = () => {
@@ -144,10 +141,10 @@ const ProjectsComponent : React.FC = () => {
                     </div>
                     <p className={'project-paragraph project-status'}>{project.status}</p>
                     <div className={'project-user'}>
-                      <div className="project-user-avatar" style={project.assigned._id === sessionStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
+                      <div className="project-user-avatar" style={project.assigned._id === localStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
                       <div className={'project-user_information'}>
                         <p className={'project-user-name'}>{project.assigned.name}</p>
-                        <p className={'project-user-position'}>{project.assigned._id === sessionStorage.getItem('login_user_id') ? 'Account' : project.assigned.position}</p>
+                        <p className={'project-user-position'}>{project.assigned._id === localStorage.getItem('login_user_id') ? 'Account' : project.assigned.position}</p>
                       </div>
                     </div>
                   </div>
