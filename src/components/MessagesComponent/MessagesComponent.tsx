@@ -136,6 +136,7 @@ const MessagesComponent : React.FC = () => {
         return data;
       })
       .catch(error => console.log(error))
+    document.location.href = '/projects';
   }
 
   const showMainMessages = () => {
@@ -162,7 +163,7 @@ const MessagesComponent : React.FC = () => {
           <div className="mainMessages_sidebar">
             <div className="mainMessages_sidebar_links">
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
-              <Link to={'/projects'} onClick={loadProjects} className="mainMessages_sidebar-link"><i className="fa fa-bars" aria-hidden="true"></i></Link>
+              <p onClick={loadProjects} className="mainMessages_sidebar-link"><i className="fa fa-bars" aria-hidden="true"></i></p>
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-line-chart" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-linkActive"><i className="fa fa-envelope" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-users" aria-hidden="true"></i></Link>

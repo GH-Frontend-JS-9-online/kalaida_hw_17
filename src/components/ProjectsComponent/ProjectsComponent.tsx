@@ -68,7 +68,7 @@ const ProjectsComponent : React.FC = () => {
     let projectsArrayLength : any = projectsArray.length;
 
     localStorage.setItem('projects_count', projectsArrayLength)
-  }, 1000)
+  }, 500)
 
 
   const showMainProjects = () => {
@@ -106,7 +106,7 @@ const ProjectsComponent : React.FC = () => {
             <div className="mainMessages_bar">
               <div className="mainMessages_bar_left">
                 <div className="mainMessages_bar_links">
-                  <Link to={'#'} className="mainMessages_bar-link mainMessages_bar-linkActive">All Projects({localStorage.getItem('projects_count')})</Link>
+                  <p className="mainMessages_bar-link mainMessages_bar-linkActive">All Projects({localStorage.getItem('projects_count')})</p>
                   <Link to={'#'} className="mainMessages_bar-link">Workflow</Link>
                 </div>
               </div>

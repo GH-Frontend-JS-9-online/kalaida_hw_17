@@ -15,16 +15,20 @@ const RegisterComponent : React.FC = () => {
     'Low-Level Developer', 'Big Data Developer', 'DevOps Developer', 'CRM Developer',  'Desktop Developer', 'Wordpress Developer', 'App Developer', 'Game Developer',
     'JavaScript Developer', 'Ruby Developer', 'QA', 'Backend Developer', 'Frontend Developer', 'Full-stack Developer', 'Manager', 'Investor Platinum', 'Investor Gold',
     'Investor Silver', 'GeekHub Student'];
-  const userAddresses = ["17 Poplar Dr. Modesto, CA 95350", "855 Peg Shop Ave. Salinas, CA 93906", "143 Ann Dr. Los Angeles, CA 90066",
+  const userAddresses : Array<string> = ["17 Poplar Dr. Modesto, CA 95350", "855 Peg Shop Ave. Salinas, CA 93906", "143 Ann Dr. Los Angeles, CA 90066",
     "25 Rockville St. San Jose, CA 95123", "992 County Road Chula Vista, CA 91911", "5 Marshall Lane Flushing, NY 11354", "7 Linden St. Rego Park, NY 11374",
-    "7042 Shore St. Brooklyn, NY 11203", "7938 Chapel Street Orlando, FL 32812", "74 Mayflower Drive Panama City, FL 32404"]
+    "7042 Shore St. Brooklyn, NY 11203", "7938 Chapel Street Orlando, FL 32812", "74 Mayflower Drive Panama City, FL 32404"];
+  const userCompanies : Array<string> = ['GeekHub corp', 'Microsoft', 'SONY', 'Google', 'Apple', 'Samsung Electronics', 'Amazon', 'Facebook', 'Tweeter', 'Intel', 'IBM', 'AMD',
+  'Nvidia', 'Nintendo', 'Oracle', 'Orange', 'PayPal', 'Netflix', 'Adobe', 'Ebay', 'Naughty Dog', 'Santa Monica Studio', 'Sony Band Studio', 'Insomniac Games', 'Rockstar Games', 'Remedy Entertainment',
+  'CD PROJECT RED', 'Activision Blizzard', 'Ubisoft', 'Guerilla Games', 'Kojuma Productions', 'Sucker Punch Productions', 'Ready At Dawn', 'Supermassive Games', 'Quantic Dream', 'Capcom',
+  'Crystal Dynamics', 'HP Enterprise', 'Alphabet', 'Yahoo', 'LinkedIn', 'Xiaomi'];
   // const emailTestString : RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const testLetters : RegExp = /[a-zA-Z]/;
   const testNumber : RegExp = /[0-9]/;
   const testName : RegExp = /^[A-Za-z][A-Za-z0-9]*$/;
   let dbUsers : any, secondDbUsers : any;
 
-  function sendRequest(url : string, myJob : string, myPhone : string, myAddress : string, myName : string, myEmail : string, myPass : string) {
+  function sendRequest(url : string, myJob : string, myPhone : string, myAddress : string, myCompany : string, myName : string, myEmail : string, myPass : string) {
     return fetch(url, {
       method : 'POST',
       headers: {
@@ -35,7 +39,7 @@ const RegisterComponent : React.FC = () => {
         description: 'Master/Lomaster.',
         phone: myPhone,
         address: myAddress,
-        organization: 'GeekHub Corp',
+        organization: myCompany,
         name: myName,
         email: myEmail,
         password: myPass,
@@ -85,7 +89,8 @@ const RegisterComponent : React.FC = () => {
       // encryptString : string = '',
       // userId : string = '',
       registerJob : string = userPosts[Math.floor(Math.random() * userPosts.length)],
-      registerAddress : string = userAddresses[Math.floor(Math.random() * userAddresses.length)];
+      registerAddress : string = userAddresses[Math.floor(Math.random() * userAddresses.length)],
+      registerCompany : string = userCompanies[Math.floor(Math.random() * userCompanies.length)];
 
     // for(let i = 0; i < emailRegister.length; i++) {
     //   if(emailRegister[i] !== '@') {
@@ -114,7 +119,7 @@ const RegisterComponent : React.FC = () => {
     //   userId += idSymbols[Math.floor(Math.random() * idSymbols.length)];
     // }
 
-    sendRequest('https://geekhub-frontend-js-9.herokuapp.com/api/users/', registerJob, registerPhone, registerAddress, nameRegister, emailRegister, passwordRegister)
+    sendRequest('https://geekhub-frontend-js-9.herokuapp.com/api/users/', registerJob, registerPhone, registerAddress, registerCompany, nameRegister, emailRegister, passwordRegister)
       .then((data) => {
         alert('You\'ve successfully registered!');
         console.log(data)
