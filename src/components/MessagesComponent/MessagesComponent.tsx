@@ -16,6 +16,8 @@ const MessagesComponent : React.FC = () => {
   // const idSymbols = 'abcdefghijklmnopqrstuvwxyz1234567890';
   // const wordsTemplates = ['Hello! How r u doing?', 'Hi! How was your day?', 'What\'s up bro!', 'Yo man!!'];
   let loginUserId : any = localStorage.getItem('login_user_id');
+  let unparsedDBUsers : any = localStorage.getItem('users'),
+    dbUsers : Array<any> = JSON.parse(unparsedDBUsers);
 
   useEffect(() => {
 
@@ -45,6 +47,28 @@ const MessagesComponent : React.FC = () => {
           })
       })
   }
+
+  useEffect(() => {
+    sendRequestGet('https://geekhub-frontend-js-9.herokuapp.com/api/users/all')
+      .then(data => {
+        let dbUsers : Array<any> = data,
+          friendIndex = Math.floor(Math.random() * dbUsers.length);
+
+        if(dbUsers[friendIndex]._id !== localStorage.getItem('login_user_id')) {
+          localStorage.setItem('friend_id', dbUsers[friendIndex]._id);
+        } else {
+          friendIndex = Math.floor(Math.random() * dbUsers.length);
+          localStorage.setItem('friend_id', dbUsers[friendIndex]._id);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+
+      unparsedDBUsers = localStorage.getItem('users');
+      dbUsers = JSON.parse(unparsedDBUsers);
+
+  })
 
   const newConversation = () => {
     sendRequestGet('https://geekhub-frontend-js-9.herokuapp.com/api/users/all')
