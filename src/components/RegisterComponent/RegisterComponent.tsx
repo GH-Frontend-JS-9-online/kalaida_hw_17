@@ -21,7 +21,7 @@ const RegisterComponent : React.FC = () => {
   const userCompanies : Array<string> = ['GeekHub corp', 'Microsoft', 'SONY', 'Google', 'Apple', 'Samsung Electronics', 'Amazon', 'Facebook', 'Tweeter', 'Intel', 'IBM', 'AMD',
   'Nvidia', 'Nintendo', 'Oracle', 'Orange', 'PayPal', 'Netflix', 'Adobe', 'Ebay', 'Naughty Dog', 'Santa Monica Studio', 'Sony Band Studio', 'Insomniac Games', 'Rockstar Games', 'Remedy Entertainment',
   'CD PROJECT RED', 'Activision Blizzard', 'Ubisoft', 'Guerilla Games', 'Kojuma Productions', 'Sucker Punch Productions', 'Ready At Dawn', 'Supermassive Games', 'Quantic Dream', 'Capcom',
-  'Crystal Dynamics', 'HP Enterprise', 'Alphabet', 'Yahoo', 'LinkedIn', 'Xiaomi'];
+  'Crystal Dynamics', 'HP Enterprise', 'Alphabet', 'Yahoo', 'LinkedIn', 'Xiaomi', 'Umbrella Corporation'];
   // const emailTestString : RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const testLetters : RegExp = /[a-zA-Z]/;
   const testNumber : RegExp = /[0-9]/;
