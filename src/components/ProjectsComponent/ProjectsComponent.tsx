@@ -97,7 +97,7 @@ const ProjectsComponent : React.FC = () => {
             <div className="mainMessages_sidebar_links">
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-linkActive"><i className="fa fa-bars" aria-hidden="true"></i></Link>
-              <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-line-chart" aria-hidden="true"></i></Link>
+              <Link to={'/insights'} className="mainMessages_sidebar-link"><i className="fa fa-line-chart" aria-hidden="true"></i></Link>
               <Link to={'/messages'} className="mainMessages_sidebar-link"><i className="fa fa-envelope" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-users" aria-hidden="true"></i></Link>
             </div>
