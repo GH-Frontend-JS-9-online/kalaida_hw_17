@@ -3,11 +3,50 @@ import './InsightsComponent.scss'
 import { Link } from "react-router-dom";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const InsightsComponent : React.FC = () => {
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(2);
   let loginUserId : any = localStorage.getItem('login_user_id');
   const percentage = 66;
+  const chartData : any = [
+    {
+      uv: 1950
+    },
+    {
+      uv: 2200
+    },
+    {
+      uv: 3500
+    },
+    {
+      uv: 2500
+    },
+    {
+      uv: 3000
+    },
+    {
+      uv: 2000
+    },
+    {
+      uv: 3500
+    },
+    {
+      uv: 3500
+    },
+    {
+      uv: 2300
+    },
+    {
+      uv: 3000
+    },
+    {
+      uv: 2300
+    },
+    {
+      uv: 2200
+    }
+  ]
 
   useEffect(() => {
 
@@ -114,6 +153,13 @@ const InsightsComponent : React.FC = () => {
                   </select>
                 </form>
               </div>
+            </div>
+            <div className="mainInsights_rechart">
+              <ResponsiveContainer>
+                <AreaChart data={chartData}>
+                  <Area type="monotone" dataKey="uv" stroke="#2994EE" fill="#2A496D" />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </main>
