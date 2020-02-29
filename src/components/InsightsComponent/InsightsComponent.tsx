@@ -8,7 +8,6 @@ import { ResponsiveContainer, AreaChart, Area } from 'recharts';
 const InsightsComponent : React.FC = () => {
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(2);
   let loginUserId : any = localStorage.getItem('login_user_id');
-  const percentage = 66;
   const chartData : any = [
     {
       uv: 1950
@@ -160,6 +159,69 @@ const InsightsComponent : React.FC = () => {
                   <Area type="monotone" dataKey="uv" stroke="#2994EE" fill="#2A496D" />
                 </AreaChart>
               </ResponsiveContainer>
+            </div>
+            <div className="mainInsights_bottom">
+              <div className="mainInsights_bottom_item mainInsights_bottom_info">
+                <div className="mainInsights_bottom_left">
+                  <p className={'mainInsights_bottom-text mainInsights_bottom-mainParagraph'}>Campaing <i className="fa fa-angle-up" aria-hidden="true"></i></p>
+                </div>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">Time <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">Views <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">Visitors <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">CTR <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">CPC <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">CPV <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">CPM <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_info-text">Status <i className="fa fa-angle-down" aria-hidden="true"></i></p>
+              </div>
+              <div className="mainInsights_bottom_item">
+                <div className="mainInsights_bottom_left">
+                  <p className={'mainInsights_bottom-text mainInsights_bottom-mainParagraph'}>Lorem ipsum dolor sit amet tetur</p>
+                </div>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">6 days</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">358 000</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">58 200</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">25%</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$3.02</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$2.51</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$28.35</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">
+                  <div id="greenCircle"></div> Active
+
+                </p>
+              </div>
+              <div className="mainInsights_bottom_item">
+                <div className="mainInsights_bottom_left">
+                  <p className={'mainInsights_bottom-text mainInsights_bottom-mainParagraph'}>Sed do eiusmod tempor</p>
+                </div>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">7 hours</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">1 200</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">800</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">10%</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$8.45</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$6.13</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$45.22</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">
+                  <div id="redCircle"></div> Disable
+
+                </p>
+              </div>
+              <div className="mainInsights_bottom_item">
+                <div className="mainInsights_bottom_left">
+                  <p className={'mainInsights_bottom-text mainInsights_bottom-mainParagraph'}>Consectetur adipisicing elit sed</p>
+                </div>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">3 days</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">69 000</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">7 300</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">19%</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$6.22</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$3.90</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">$37.80</p>
+                <p className="mainInsights_bottom-text mainInsights_bottom_item-text">
+                  <div id="greenCircle"></div> Active
+
+                </p>
+              </div>
             </div>
           </div>
         </main>

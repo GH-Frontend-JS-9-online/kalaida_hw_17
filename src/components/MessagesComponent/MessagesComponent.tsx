@@ -67,7 +67,7 @@ const MessagesComponent : React.FC = () => {
 
     unparsedDBUsers = localStorage.getItem('users');
     dbUsers = JSON.parse(unparsedDBUsers);
-  }, 1000)
+  }, 1000);
 
   // useEffect(() => {
   //   sendRequestGet('https://geekhub-frontend-js-9.herokuapp.com/api/users/all')
@@ -183,7 +183,7 @@ const MessagesComponent : React.FC = () => {
           <div className="mainMessages_sidebar">
             <div className="mainMessages_sidebar_links">
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
-              <p onClick={loadProjects} className="mainMessages_sidebar-link"><i className="fa fa-bars" aria-hidden="true"></i></p>
+              <Link to={'/projects'} className="mainMessages_sidebar-link"><i className="fa fa-bars" aria-hidden="true"></i></Link>
               <Link to={'/insights'} className="mainMessages_sidebar-link"><i className="fa fa-line-chart" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-linkActive"><i className="fa fa-envelope" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-users" aria-hidden="true"></i></Link>
