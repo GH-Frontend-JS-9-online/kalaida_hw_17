@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './InsightsComponent.scss'
 import { Link } from "react-router-dom";
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { ResponsiveContainer, AreaChart, Area } from 'recharts';
 
@@ -120,7 +120,7 @@ const InsightsComponent : React.FC = () => {
               <div className="mainInsights_top_circles">
 
                 <div className="mainInsights_top_statistic">
-                  <CircularProgressbar className={'mainInsights_top-circle'} value={75} text={`75%`} />
+                  <CircularProgressbar className={'mainInsights_top-circle'} value={75} text={`75%`} styles={buildStyles({trailColor: '#4A5162', pathColor: '#2997EC', textSize: 24, textColor: '#2997EC'})} strokeWidth={5} />
                   <div className="mainInsights_top_statistic_text" style={{ marginLeft: '125px' }}>
                     <p className={'mainInsights_top_statistic-number'}>1 300</p>
                     <p className={'mainInsights_top_statistic-title'}>Views</p>
@@ -128,7 +128,7 @@ const InsightsComponent : React.FC = () => {
                 </div>
 
                 <div className="mainInsights_top_statistic">
-                  <CircularProgressbar className={'mainInsights_top-circle'} value={35} text={`35%`} />
+                  <CircularProgressbar className={'mainInsights_top-circle'} value={35} text={`35%`} styles={buildStyles({trailColor: '#4A5162', pathColor: '#2997EC', textSize: 24, textColor: '#2997EC'})} strokeWidth={5} />
                   <div className="mainInsights_top_statistic_text" style={{ marginLeft: '125px' }}>
                     <p className={'mainInsights_top_statistic-number'}>800</p>
                     <p className={'mainInsights_top_statistic-title'}>Visitors</p>
@@ -136,7 +136,7 @@ const InsightsComponent : React.FC = () => {
                 </div>
 
                 <div className="mainInsights_top_statistic">
-                  <CircularProgressbar className={'mainInsights_top-circle'} value={62} text={`62%`} />
+                  <CircularProgressbar className={'mainInsights_top-circle'} value={62} text={`62%`} styles={buildStyles({trailColor: '#4A5162', pathColor: '#2997EC', textSize: 24, textColor: '#2997EC'})} strokeWidth={5} />
                   <div className="mainInsights_top_statistic_text" style={{ marginLeft: '125px' }}>
                     <p className={'mainInsights_top_statistic-number'}>3 800</p>
                     <p className={'mainInsights_top_statistic-title'}>Impressions</p>
