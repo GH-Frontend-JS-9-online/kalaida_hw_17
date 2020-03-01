@@ -87,7 +87,7 @@ const AddProjectsComponent : React.FC = () => {
   };
 
   useEffect(() => {
-    if(!/^[A-Za-z\s][A-Za-z0-9/!_.\s-]*$/.test(projectTitle) || projectTitle.search(/[A-Z]/) < 0 || projectTitle.length < 1 || projectTitle.length > 32 || !/^[A-Za-z\s][A-Za-z0-9/!_.\s-]*$/.test(projectCompany) || projectCompany.search(/[A-Z]/) < 0 || projectCompany.length < 1 || projectCompany.length > 32 || projectCost.length < 1 || projectCost.length > 10 || !/^[0-9]*$/.test(projectCost) || !checkDate.test(projectDeadline)) {
+    if(!/^[A-Za-z\s][A-Za-z0-9/!_.\s-]*$/.test(projectTitle) || projectTitle.search(/[A-Z]/) < 0 || projectTitle.length < 1 || projectTitle.length > 28 || !/^[A-Za-z\s][A-Za-z0-9/!_.\s-]*$/.test(projectCompany) || projectCompany.search(/[A-Z]/) < 0 || projectCompany.length < 1 || projectCompany.length > 28 || projectCost.length < 1 || projectCost.length > 10 || !/^[0-9]*$/.test(projectCost) || !checkDate.test(projectDeadline)) {
       setAddProjectBlocker('addProject-blocker');
       setLoginError('Oops, looks like title, company, cost or deadline is incorrect. Please try again.');
     } else {

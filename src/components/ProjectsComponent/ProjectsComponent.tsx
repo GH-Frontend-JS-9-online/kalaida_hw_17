@@ -1,10 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './ProjectsComponent.scss'
+import './ProjectsWorkFlowComponent.scss'
 import { Link } from "react-router-dom";
+import useDraggable from "../../services/useDraggable";
 
 const ProjectsComponent : React.FC = () => {
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(0);
-  const [ projects, setProjects ] : React.ComponentState = useState(localStorage.getItem('sorted_projects_array'));
+  const [ showContentNumber, setShowContentNumber ] : React.ComponentState = useState(0);
+  let projectIndex : number = -1;
+  const projects: any = localStorage.getItem('sorted_projects_array');
   let parsedProjects : any = JSON.parse(projects);
   let loginUserId : any = localStorage.getItem('login_user_id');
 
@@ -24,9 +28,9 @@ const ProjectsComponent : React.FC = () => {
   }
 
 
-  const sendRequest = (url : string, body = null) => {
+  const sendRequest = (url : string, method : any, body = null) => {
     return fetch(url, {
-      method: 'GET',
+      method: method,
       headers: {
         'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTE5YzIyM2E0MTk5YzAwMjI3NTI2OGEiLCJpYXQiOjE1Nzk2ODc4OTl9.M5q83O_nP6B8SbfNKOs3CaQTu4JaQcbr_MgDLSgqnTU'
       }
@@ -42,10 +46,30 @@ const ProjectsComponent : React.FC = () => {
             throw err;
           })
       })
-  }
+  };
+
+  const sendRequestDel = (url : string, body = null) => {
+    return fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        return response.json()
+          .then(error => {
+            const err : any = new Error('Something went wrong');
+            err.data = error;
+            throw err;
+          })
+      })
+  };
 
   setInterval(function () {
-    sendRequest('https://geekhub-frontend-js-9.herokuapp.com/api/projects')
+    sendRequest('https://geekhub-frontend-js-9.herokuapp.com/api/projects', 'GET')
       .then(data => {
         localStorage.setItem('projects_array', JSON.stringify(data));
         return data;
@@ -68,8 +92,83 @@ const ProjectsComponent : React.FC = () => {
     let projectsArrayLength : any = projectsArray.length;
 
     localStorage.setItem('projects_count', projectsArrayLength)
-  }, 500)
+  }, 500);
 
+  const deleteProject = () => {
+    let projectId = parsedProjects[projectIndex]._id;
+    sendRequestDel(`https://geekhub-frontend-js-9.herokuapp.com/api/projects/${projectId}`)
+      .then(data => {
+        console.log(data);
+        alert('Project was deleted! Please reload webpage to see changes!');
+      })
+
+  }
+
+  const showProjects = () => {
+    return(
+      <>
+        <div className="mainProjects_bottom_posts">
+          { parsedProjects.map( (project : any, index : number) => <div className={`mainProjects_bottom_project 
+                ${project.progress > 0 ? 'mainProjects_bottom_projectBlueBorder' : 'mainProjects_bottom_projectWhiteBorder'}
+                 ${project.progress === 100 ? 'mainProjects_bottom_projectGreenBorder' : null}`} key={index}>
+
+            <div className="mainProjects_bottom_project_container">
+              <p className={'project-paragraph project-title'}>
+                { project.title }
+                <span>{ project.company }</span>
+              </p>
+              <p className={'project-paragraph project-cost'}>{project.cost}</p>
+              <p className={'project-paragraph project-deadline'}>{formatDate(project.deadline)}</p>
+              <p className={'project-paragraph project-spentTime'}>{project.timeSpent} hours</p>
+              <div className={'project-paragraph2 project-progress'}><span>{project.progress}%</span>
+                <div className={'project-progress-bar'}>
+                  <div className={`project-progress-bar_container ${project.progress === 100 ? 'project-progress-bar_containerGreen' : null}`} style={{width: `${project.progress}%`}}></div>
+                </div>
+              </div>
+              <p className={'project-paragraph project-status'}>{project.status}</p>
+              <div className={'project-user'}>
+                <div className="project-user-avatar" style={project.assigned._id === localStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
+                <div className={'project-user_information'}>
+                  <p className={'project-user-name'}>{project.assigned.name}</p>
+                  <p className={'project-user-position'}>{project.assigned._id === localStorage.getItem('login_user_id') ? 'Account' : project.assigned.position}</p>
+                </div>
+              </div>
+              <p className={'project-menu'} onClick={() => {projectIndex = index; deleteProject();}}><i className="fa fa-ellipsis-v" aria-hidden="true"></i></p>
+            </div>
+
+          </div> ) }
+
+        </div>
+      </>
+    );
+  }
+
+  const showWorkflow = () => {
+    const DraggableCard = ({ children } : any) => {
+      const cardRef = useRef(null);
+      useDraggable(cardRef);
+
+      return(
+        <div className={'mainProjects_workflow_item'} ref={cardRef}>
+          {children}
+        </div>
+      );
+    }
+
+    return(
+      <div className={'mainProjects_workflow'}>
+        { parsedProjects.map( (project : any, index : number) => <DraggableCard key={index}>
+          <div className={'mainProjects_workflow_item-avatar'} style={project.assigned._id === localStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
+          <div className={'mainProjects_workflow_item_text'}>
+            <p className={'mainProjects_workflow_item-name'}>{project.title}</p>
+            <p className={'mainProjects_workflow_item-info'}>{project.company} * {project.cost}</p>
+          </div>
+          <p className={'mainProjects_workflow_item-menu'} onClick={() => {projectIndex = index; deleteProject();}}><i className="fa fa-ellipsis-v" aria-hidden="true"></i></p>
+        </DraggableCard> ) }
+
+      </div>
+    );
+  }
 
   const showMainProjects = () => {
 
@@ -106,8 +205,12 @@ const ProjectsComponent : React.FC = () => {
             <div className="mainMessages_bar">
               <div className="mainMessages_bar_left">
                 <div className="mainMessages_bar_links">
-                  <p className="mainMessages_bar-link mainMessages_bar-linkActive">All Projects({localStorage.getItem('projects_count')})</p>
-                  <Link to={'#'} className="mainMessages_bar-link">Workflow</Link>
+                  <p onClick={() => {
+                    setShowContentNumber(0);
+                  }} className={`mainMessages_bar-link ${ showContentNumber === 0 ? 'mainMessages_bar-linkActive' : null }`}>All Projects({localStorage.getItem('projects_count')})</p>
+                  <p onClick={() => {
+                    setShowContentNumber(1);
+                  }} className={`mainMessages_bar-link ${ showContentNumber === 1 ? 'mainMessages_bar-linkActive' : null }`}>Workflow</p>
                 </div>
               </div>
               <div className="mainMessages_bar_right">
@@ -121,37 +224,8 @@ const ProjectsComponent : React.FC = () => {
             </div>
             <div className="mainProjects_bottom" onClick={() => console.log(parsedProjects)}>
 
-              <div className="mainProjects_bottom_posts">
-                { parsedProjects.map( (project : any, index : number) => <div className={`mainProjects_bottom_project 
-                ${project.progress > 0 ? 'mainProjects_bottom_projectBlueBorder' : 'mainProjects_bottom_projectWhiteBorder'}
-                 ${project.progress === 100 ? 'mainProjects_bottom_projectGreenBorder' : null}`} key={index}>
+              { showContentNumber === 0 ? showProjects() : showWorkflow() }
 
-                  <div className="mainProjects_bottom_project_container">
-                    <p className={'project-paragraph project-title'}>
-                      { project.title }
-                      <span>{ project.company }</span>
-                    </p>
-                    <p className={'project-paragraph project-cost'}>{project.cost}</p>
-                    <p className={'project-paragraph project-deadline'}>{formatDate(project.deadline)}</p>
-                    <p className={'project-paragraph project-spentTime'}>{project.timeSpent} hours</p>
-                    <div className={'project-paragraph2 project-progress'}><span>{project.progress}%</span>
-                      <div className={'project-progress-bar'}>
-                        <div className={`project-progress-bar_container ${project.progress === 100 ? 'project-progress-bar_containerGreen' : null}`} style={{width: `${project.progress}%`}}></div>
-                      </div>
-                    </div>
-                    <p className={'project-paragraph project-status'}>{project.status}</p>
-                    <div className={'project-user'}>
-                      <div className="project-user-avatar" style={project.assigned._id === localStorage.getItem('login_user_id') ? {background: '#fff'} : {background: '#BBBBBB'}}></div>
-                      <div className={'project-user_information'}>
-                        <p className={'project-user-name'}>{project.assigned.name}</p>
-                        <p className={'project-user-position'}>{project.assigned._id === localStorage.getItem('login_user_id') ? 'Account' : project.assigned.position}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                </div> ) }
-
-              </div>
             </div>
           </div>
         </main>

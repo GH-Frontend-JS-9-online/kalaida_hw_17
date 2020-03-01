@@ -1,0 +1,64 @@
+.mainProjects {
+  &_workflow {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    &_item {
+      width: 250px;
+      height: 75px;
+      background: #3A3E51;
+      border-radius: 4px;
+      cursor: grab;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      margin-left: 40px;
+      letter-spacing: .5px;
+      &:active {
+        cursor: grabbing;
+        z-index: 9999999;
+      }
+      &-avatar {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        margin-left: 15px;
+      }
+      &_text {
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        color: #fff;
+        margin-left: 20px;
+      }
+      &-name {
+        font-size: 13px;
+        margin-bottom: 5px;
+      }
+      &-info {
+        font-size: 10px;
+        margin-top: 0;
+        opacity: .5;
+      }
+      &-menu {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        opacity: .5;
+        font-size: 18px;
+        color: #fff;
+        transition: .2s;
+        &:hover {
+          opacity: .7;
+        }
+        &:active {
+          opacity: .4;
+        }
+      }
+    }
+  }
+}
