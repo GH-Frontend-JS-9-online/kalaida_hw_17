@@ -12,6 +12,44 @@ const HomeComponent : React.FC = () => {
   const projects : any = localStorage.getItem('sorted_projects_array');
   let parsedProjects : any = JSON.parse(projects);
   let loginUserId : any = localStorage.getItem('login_user_id');
+  const chartData : any = [
+    {
+      uv: 1950
+    },
+    {
+      uv: 2200
+    },
+    {
+      uv: 3500
+    },
+    {
+      uv: 2500
+    },
+    {
+      uv: 3000
+    },
+    {
+      uv: 2000
+    },
+    {
+      uv: 3500
+    },
+    {
+      uv: 3500
+    },
+    {
+      uv: 2300
+    },
+    {
+      uv: 3000
+    },
+    {
+      uv: 2300
+    },
+    {
+      uv: 2200
+    }
+  ]
 
   useEffect(() => {
 
@@ -129,8 +167,53 @@ const HomeComponent : React.FC = () => {
               <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-users" aria-hidden="true"></i></Link>
             </div>
           </div>
-          <div className="mainMessages_content">
+          <div className="home_content">
+            <div className="home_content_blocks">
+              <div className="home_content_block home_content_insights">
+                <div className="mainInsights_top">
+                  <div className="home_content_circles">
 
+                    <div className="mainInsights_top_statistic home_content_statistic">
+                      <CircularProgressbar className={'mainInsights_top-circle'} value={75} text={`75%`} styles={buildStyles({trailColor: '#4A5162', pathColor: '#2997EC', textSize: 24, textColor: '#2997EC'})} strokeWidth={5} />
+                      <div className="mainInsights_top_statistic_text" style={{ marginLeft: '125px' }}>
+                        <p className={'mainInsights_top_statistic-number'}>1 300</p>
+                        <p className={'mainInsights_top_statistic-title'}>Views</p>
+                      </div>
+                    </div>
+
+                    <div className="mainInsights_top_statistic home_content_statistic">
+                      <CircularProgressbar className={'mainInsights_top-circle'} value={35} text={`35%`} styles={buildStyles({trailColor: '#4A5162', pathColor: '#2997EC', textSize: 24, textColor: '#2997EC'})} strokeWidth={5} />
+                      <div className="mainInsights_top_statistic_text" style={{ marginLeft: '125px' }}>
+                        <p className={'mainInsights_top_statistic-number'}>800</p>
+                        <p className={'mainInsights_top_statistic-title'}>Visitors</p>
+                      </div>
+                    </div>
+
+                    <div className="mainInsights_top_statistic home_content_statistic">
+                      <CircularProgressbar className={'mainInsights_top-circle'} value={62} text={`62%`} styles={buildStyles({trailColor: '#4A5162', pathColor: '#2997EC', textSize: 24, textColor: '#2997EC'})} strokeWidth={5} />
+                      <div className="mainInsights_top_statistic_text" style={{ marginLeft: '125px' }}>
+                        <p className={'mainInsights_top_statistic-number'}>3 800</p>
+                        <p className={'mainInsights_top_statistic-title'}>Impressions</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div className="home_content_insights_rechart">
+                  <ResponsiveContainer>
+                    <AreaChart data={chartData}>
+                      <Area type="monotone" dataKey="uv" stroke="#2994EE" fill="#2A496D" />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              <div className="home_content_block home_content_smallBlock home_content_projects"></div>
+              <div className="home_content_block home_content_chart"></div>
+              <div className="home_content_block home_content_smallBlock home_content_inbox"></div>
+              <div className="home_content_block home_content_smallBlock home_content_calendar">
+                <Calendar className={'home_content_calendarBlock'} />
+              </div>
+            </div>
           </div>
         </main>
       </>

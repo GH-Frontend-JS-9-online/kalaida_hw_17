@@ -1,0 +1,160 @@
+.home {
+  &_content {
+    width: 95%;
+    min-height: 845px;
+    margin-left: 5%;
+    &_blocks {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    &_block {
+      height: 400px;
+      background: #2E3342;
+      margin: 5px;
+    }
+    &_smallBlock {
+      width: 24%;
+      display: flex;
+      flex-direction: column;
+    }
+    &_insights {
+      width: 74.5%;
+      &_rechart {
+        width: 100%;
+        height: 280px;
+        background: transparent;
+        margin-top: 5px;
+      }
+    }
+    &_circles {
+      width: 100%;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+    }
+    &_chart {
+      width: 50%;
+    }
+    &_calendar {
+      & div {
+        width: 100%;
+        border: none;
+        outline: none;
+      }
+      &Block {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.react-calendar__navigation {
+  min-height: 70px;
+  background: #3A3E51;
+  & button {
+    color: #fff;
+    font-weight: 800;
+    font-size: 20px;
+    background: #3A3E51;
+  }
+  margin-bottom: 0;
+}
+
+.react-calendar__viewContainer {
+  height: 332px;
+  background: #2E3342;
+  margin-top: -17px;
+}
+
+.react-calendar__month-view__weekdays {
+  margin-top: 35px;
+}
+
+@media(min-width: 320px) and (max-width: 1588px) {
+  .home {
+    &_content {
+      &_insights {
+        width: 100%;
+      }
+      &_smallBlock {
+        width: 35%;
+      }
+      &_projects {
+        width: 34%;
+      }
+      &_chart {
+        width: 63%;
+      }
+    }
+  }
+}
+
+@media(min-width: 320px) and (max-width: 1150px) {
+  .home {
+    &_content {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 110px;
+      &_statistic {
+        right: 0;
+      }
+    }
+  }
+}
+
+@media(min-width: 680px) and (max-width: 960px) {
+  .home {
+    &_content {
+      &_block {
+        width: 48.5%;
+      }
+      &_insights {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media(min-width: 320px) and (max-width: 679px) {
+  .home {
+    &_content {
+      &_block {
+        width: 99%;
+      }
+      &_insights {
+        min-height: 400px;
+      }
+      &_circles {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      &_statistic {
+        right: 55px;
+      }
+    }
+  }
+}
+
+@media(min-width: 320px) and (max-width: 516px) {
+  .home {
+    &_content {
+      &_insights {
+        min-height: 480px;
+      }
+      &_statistic {
+        right: 40px;
+      }
+    }
+  }
+}
+
+@media(min-width: 320px) and (max-width: 344px) {
+  .home {
+    &_content {
+      &_insights {
+        min-height: 580px;
+      }
+    }
+  }
+}
