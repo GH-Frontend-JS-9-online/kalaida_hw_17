@@ -8,6 +8,7 @@ import MessagesComponent from "./components/MessagesComponent/MessagesComponent"
 import ProjectsComponent from "./components/ProjectsComponent/ProjectsComponent";
 import AddProjectsComponent from "./components/AddProjectsComponent/AddProjectsComponent";
 import InsightsComponent from "./components/InsightsComponent/InsightsComponent";
+import HomeComponent from "./components/HomeComponent/HomeComponent";
 
 
 const App : React.FC = () => {
@@ -18,6 +19,7 @@ const App : React.FC = () => {
           <Route exact path='/' component={LoginComponent} />
           <Route exact path='/register' component={RegisterComponent} />
           <Route exact path='/reset' component={ChangePasswordComponent} />
+          <Route exact path='/home' component={HomeComponent} />
           <Route exact path='/messages' component={MessagesComponent} />
           <Route exact path='/projects' component={ProjectsComponent} />
           <Route exact path='/add_project' component={AddProjectsComponent} />
