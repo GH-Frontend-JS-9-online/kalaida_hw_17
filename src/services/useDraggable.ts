@@ -26,9 +26,9 @@ export default function useDraggable(el : any) {
     return () => {
       el.current.removeEventListener('mousedown', handleMouseDown);
     };
-  }, [dx, dy]);
+  }, [dx, dy, el]);
 
   useEffect(() => {
     el.current.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
-  }, [dx, dy]);
+  }, [dx, dy, el]);
 }

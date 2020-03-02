@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './AddProjectsComponent.scss'
 import { Link } from "react-router-dom";
-import validator from "validator";
 
 const AddProjectsComponent : React.FC = () => {
   const [ showNumber, setShowNumber ] : React.ComponentState = useState(0);

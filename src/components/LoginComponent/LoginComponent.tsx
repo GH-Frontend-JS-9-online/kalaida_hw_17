@@ -169,7 +169,7 @@ const LoginComponent : React.FC = () => {
         <div className="header_container">
           <p id="loginAlert" className="header-loginText header-loginTextLogin"><i className="fa fa-check" aria-hidden="true"></i> You've
             successfully entered in your account!
-            <Link to={'/messages'} className="header-link">Messages</Link></p>
+            <Link to={'/home'} className="header-link">Home</Link></p>
         </div>
       </header>
     )

@@ -102,7 +102,7 @@ const ProjectsComponent : React.FC = () => {
         alert('Project was deleted! Please reload webpage to see changes!');
       })
 
-  }
+  };
 
   const showProjects = () => {
     return(
@@ -194,7 +194,7 @@ const ProjectsComponent : React.FC = () => {
         <main className="mainMessages">
           <div className="mainMessages_sidebar">
             <div className="mainMessages_sidebar_links">
-              <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
+              <Link to={'/home'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-linkActive"><i className="fa fa-bars" aria-hidden="true"></i></Link>
               <Link to={'/insights'} className="mainMessages_sidebar-link"><i className="fa fa-line-chart" aria-hidden="true"></i></Link>
               <Link to={'/messages'} className="mainMessages_sidebar-link"><i className="fa fa-envelope" aria-hidden="true"></i></Link>
@@ -231,7 +231,7 @@ const ProjectsComponent : React.FC = () => {
         </main>
       </>
     )
-  }
+  };
 
   const showNeedLoginSection = () => {
     return (
@@ -241,13 +241,12 @@ const ProjectsComponent : React.FC = () => {
         </div>
       </>
     )
-  }
+  };
 
 
   return (
     <>
-      { showNumber === 0 ? showMainProjects() : null}
-      { showNumber === 1 ? showNeedLoginSection() : null }
+      { showNumber === 1 ? showNeedLoginSection() : showMainProjects() }
     </>
   )
 }

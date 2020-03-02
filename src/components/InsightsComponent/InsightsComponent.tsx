@@ -108,7 +108,7 @@ const InsightsComponent : React.FC = () => {
         <main className="mainMessages">
           <div className="mainMessages_sidebar">
             <div className="mainMessages_sidebar_links">
-              <Link to={'#'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
+              <Link to={'/home'} className="mainMessages_sidebar-link"><i className="fa fa-home" aria-hidden="true"></i></Link>
               <Link to={'/projects'} className="mainMessages_sidebar-link"><i className="fa fa-bars" aria-hidden="true"></i></Link>
               <Link to={'#'} className="mainMessages_sidebar-linkActive"><i className="fa fa-line-chart" aria-hidden="true"></i></Link>
               <Link to={'/messages'} className="mainMessages_sidebar-link"><i className="fa fa-envelope" aria-hidden="true"></i></Link>
