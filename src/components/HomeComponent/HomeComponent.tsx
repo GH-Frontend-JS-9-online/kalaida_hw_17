@@ -13,6 +13,8 @@ const HomeComponent : React.FC = () => {
   const projects : any = localStorage.getItem('sorted_projects_array');
   let parsedProjects : any = JSON.parse(projects);
   let loginUserId : any = localStorage.getItem('login_user_id');
+  let unsortedUserProjects : any = localStorage.getItem('user_projects');
+  let userProjects : any = JSON.parse(unsortedUserProjects);
   const chartData : any = [
     {
       uv: 1950
@@ -110,6 +112,7 @@ const HomeComponent : React.FC = () => {
       .catch(error => console.log(error));
 
     let projectsArray : any = [];
+    let userProjectsArray : any = [];
 
     let localStorageProjects : any = localStorage.getItem('projects_array');
     let parsedLocalStorageProjects : any = JSON.parse(localStorageProjects);
@@ -118,13 +121,15 @@ const HomeComponent : React.FC = () => {
       if(parsedLocalStorageProjects[i].assigned !== null) {
         projectsArray.push(parsedLocalStorageProjects[i])
       }
+      if(parsedLocalStorageProjects[i].assigned._id === loginUserId) {
+        userProjectsArray.push(parsedLocalStorageProjects[i]);
+      }
     }
 
     localStorage.setItem('sorted_projects_array', JSON.stringify(projectsArray));
+    localStorage.setItem('user_projects', JSON.stringify(userProjectsArray));
 
-    let projectsArrayLength : any = projectsArray.length;
 
-    localStorage.setItem('projects_count', projectsArrayLength)
   }, 500);
 
   const deleteProject = () => {
@@ -170,6 +175,7 @@ const HomeComponent : React.FC = () => {
           </div>
           <div className="home_content">
             <div className="home_content_blocks">
+
               <div className="home_content_block home_content_insights">
                 <div className="mainInsights_top">
                   <div className="home_content_circles">
@@ -208,12 +214,30 @@ const HomeComponent : React.FC = () => {
                   </ResponsiveContainer>
                 </div>
               </div>
-              <div className="home_content_block home_content_smallBlock home_content_projects"></div>
+
+              <div className="home_content_block home_content_smallBlock home_content_projects">
+                <div className="home_content_projects_top">
+                  <h3 className={'home_content_projects-title'}>Your Projects</h3>
+                </div>
+                <div className="home_content_projects_blocks">
+                  { userProjects.map( (project : any, index : number) => <div className="home_content_projects_project">
+                    <div className={'home_content_projects-avatar'}></div>
+                    <div className={'home_content_projects_text'}>
+                      <p className={'home_content_projects-name'}>{project.title}</p>
+                      <p className={'home_content_projects-info'}>{project.company} * {project.cost}</p>
+                    </div>
+                    <p className={'mainProjects_workflow_item-menu'} onClick={() => {projectIndex = index; deleteProject();}}><i className="fa fa-ellipsis-v" aria-hidden="true"></i></p>
+                  </div> ) }
+                </div>
+              </div>
+
               <div className="home_content_block home_content_chart"></div>
               <div className="home_content_block home_content_smallBlock home_content_inbox"></div>
+
               <div className="home_content_block home_content_smallBlock home_content_calendar">
                 <Calendar calendarType={'US'} locale={'en-EN'} className={'home_content_calendarBlock'} />
               </div>
+
             </div>
           </div>
         </main>

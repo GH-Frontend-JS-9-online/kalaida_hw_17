@@ -33,6 +33,61 @@
       display: flex;
       align-items: center;
     }
+    &_projects {
+      overflow-y: auto;
+      &_top {
+        width: 100%;
+        height: 70px;
+        background: #3A3E50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      &-title {
+        color: #fff;
+        font-size: 26px;
+      }
+      &_blocks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      &_project {
+        width: 100%;
+        height: 85px;
+        border-bottom: 1px solid #434959;
+        display: flex;
+        align-items: center;
+      }
+      &-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-left: 15px;
+        background: #fff;
+      }
+      &_text {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        margin-left: 10px;
+        * {
+          color: #fff;
+          font-weight: 800;
+        }
+      }
+      &-name {
+        margin-bottom: 5px;
+      }
+      &-info {
+        font-size: 13px;
+        margin-top: 0;
+        opacity: .5;
+      }
+    }
     &_chart {
       width: 50%;
     }
