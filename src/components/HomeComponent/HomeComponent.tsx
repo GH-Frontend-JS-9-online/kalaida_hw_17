@@ -306,7 +306,11 @@ const HomeComponent : React.FC = () => {
                 </div>
               </div>
 
-              <div className="home_content_block home_content_smallBlock home_content_inbox"></div>
+              <div className="home_content_block home_content_smallBlock home_content_inbox">
+                <div className="home_content_projects_top">
+                  <h3 className={'home_content_projects-title'}>Inbox(<span className={'home_content_inbox_span'}>2</span>)</h3>
+                </div>
+              </div>
 
               <div className="home_content_block home_content_smallBlock home_content_calendar">
                 <Calendar calendarType={'US'} locale={'en-EN'} className={'home_content_calendarBlock'} />
