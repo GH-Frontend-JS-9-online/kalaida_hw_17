@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import 'react-calendar/dist/Calendar.css';
 import './HomeComponent.scss';
 import Calendar from 'react-calendar';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
@@ -211,7 +212,7 @@ const HomeComponent : React.FC = () => {
               <div className="home_content_block home_content_chart"></div>
               <div className="home_content_block home_content_smallBlock home_content_inbox"></div>
               <div className="home_content_block home_content_smallBlock home_content_calendar">
-                <Calendar className={'home_content_calendarBlock'} />
+                <Calendar calendarType={'US'} locale={'en-EN'} className={'home_content_calendarBlock'} />
               </div>
             </div>
           </div>
