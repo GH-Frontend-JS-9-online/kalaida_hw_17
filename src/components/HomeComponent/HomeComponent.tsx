@@ -4,7 +4,7 @@ import './HomeComponent.scss';
 import Calendar from 'react-calendar';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, BarChart, Bar, XAxis, CartesianGrid } from 'recharts';
 import { Link } from "react-router-dom";
 
 const HomeComponent : React.FC = () => {
@@ -52,7 +52,57 @@ const HomeComponent : React.FC = () => {
     {
       uv: 2200
     }
-  ]
+  ];
+  const barData = [
+    {
+      name: '1',
+      uv: 2000
+    },
+    {
+      name: '2',
+      uv: 3300
+    },
+    {
+      name: '3',
+      uv: 2500
+    },
+    {
+      name: '4',
+      uv: 1600
+    },
+    {
+      name: '5',
+      uv: 900
+    },
+    {
+      name: '6',
+      uv: 1600
+    },
+    {
+      name: '7',
+      uv: 1600
+    },
+    {
+      name: '8',
+      uv: 2200
+    },
+    {
+      name: '9',
+      uv: 1800
+    },
+    {
+      name: '10',
+      uv: 2490
+    },
+    {
+      name: '11',
+      uv: 2100
+    },
+    {
+      name: '12',
+      uv: 500
+    }
+  ];
 
   useEffect(() => {
 
@@ -220,7 +270,7 @@ const HomeComponent : React.FC = () => {
                   <h3 className={'home_content_projects-title'}>Your Projects</h3>
                 </div>
                 <div className="home_content_projects_blocks">
-                  { userProjects.map( (project : any, index : number) => <div className="home_content_projects_project">
+                  { userProjects.map( (project : any, index : number) => <div className="home_content_projects_project" key={index}>
                     <div className={'home_content_projects-avatar'}></div>
                     <div className={'home_content_projects_text'}>
                       <p className={'home_content_projects-name'}>{project.title}</p>
@@ -231,7 +281,31 @@ const HomeComponent : React.FC = () => {
                 </div>
               </div>
 
-              <div className="home_content_block home_content_chart"></div>
+              <div className="home_content_block home_content_chart">
+                <div className="home_content_chart_top">
+                  <div className="home_content_chart_left">
+                    <h3 className="home_content_chart-title">Sales report</h3>
+                  </div>
+                  <div className="home_content_chart_right">
+                    <form>
+                      <label htmlFor="filterSelectBarChart" className="home_content_chart-label">Show:</label>
+                      <select name="filterSelectBarChart" id="filterSelectBarChart">
+                        <option value="All">Year</option>
+                      </select>
+                    </form>
+                  </div>
+                </div>
+                <div className="home_content_chart_barchart">
+                  <ResponsiveContainer>
+                    <BarChart data={barData}>
+                      <XAxis dataKey="name" stroke={'#989AA8'} />
+                      <CartesianGrid horizontal={true} vertical={false} stroke="#404150" />
+                      <Bar dataKey="uv" barSize={50} fill="#4F5564"/>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
               <div className="home_content_block home_content_smallBlock home_content_inbox"></div>
 
               <div className="home_content_block home_content_smallBlock home_content_calendar">
